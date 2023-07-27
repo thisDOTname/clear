@@ -1,11 +1,13 @@
 const { App } = require("@slack/bolt");
+const dotenv = require('dotenv');
 
-
+dotenv.config();
+console.log('Foo : ', process.env);
 const app = new App({
-    token: "xoxp-3172215028145-3161931853348-5660607399105-73b9b034314954dd57e418493201ba79", //Find in the Oauth  & Permissions tab
-    signingSecret: "3f8391654e2e054ff2a4ff020f3bbe6e", // Find in Basic Information Tab
+    token: process.env.AUTH_TOKEN, //Find in the Oauth  & Permissions tab
+    signingSecret: process.env.SECRET, // Find in Basic Information Tab
     socketMode:true,
-    appToken: "xapp-1-A03QW37RM6Y-5641310079478-56050209e40c02bf562c93e5b50bab186416ea338cddffa3b51462833c2fa9e5" // Token from the App-level Token that we created
+    appToken: process.env.APP_TOKEN // Token from the App-level Token that we created
 });
 
 (async () => {
@@ -20,7 +22,7 @@ app.command("/clean", async ({ command, ack, say, client }) => {
       // Store conversation history
         let conversationHistory;
         // ID of channel you watch to fetch the history for
-        let channelId = "C05JLNGSW15";
+        let channelId = process.env.CHANNEL_ID;
 
         try {
         // Call the conversations.history method using WebClient
