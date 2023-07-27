@@ -2,7 +2,6 @@ const { App } = require("@slack/bolt");
 const dotenv = require('dotenv');
 
 dotenv.config();
-console.log('Foo : ', process.env);
 const app = new App({
     token: process.env.AUTH_TOKEN, //Find in the Oauth  & Permissions tab
     signingSecret: process.env.SECRET, // Find in Basic Information Tab
